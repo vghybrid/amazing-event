@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="shortcut icon" href="./assets/img/logo_amazing_events.png type=" image/x-icon">
+  <link rel="icon" href="./assets/img/logo_amazing_events.png" type="image/x-icon">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
+  <link rel="stylesheet" href="./assets/css/styles.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css">
+  <title>Upcoming Events | Vue</title>
+</head>
+
+<body>
+  <div id="app">
+    <nav class="navbar navbar-expand-lg bg-dark sticky-top">
+      <div class="container">
+        <a class="navbar-brand" href="#">
+          <img src="./assets/img/logo_amazing_events.png" class="img-fluid logo" alt="logo amazing events">
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup"
+          aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse flex-row-reverse" id="navbarNavAltMarkup">
+          <div class="navbar-nav">
+            <a class="nav-link mt-2 mt-lg-0" href="./index.html">Home</a>
+            <a class="nav-link mt-2 mt-lg-0" href="#">Upcoming Events</a>
+            <a class="nav-link mt-2 mt-lg-0" href="./pastevent.html">Past Events</a>
+            <a class="nav-link mt-2 mt-lg-0" href="./contact.html">Contact Us</a>
+            <a class="nav-link mt-2 mt-lg-0" href="./stats.html">Stats</a>
+          </div>
+        </div>
+      </div>
+    </nav>
+    <div class="line"></div>
+    <header class="container py-5">
+      <h1 class="text-center">Upcoming Events</h1>
+    </header>
+    <div class="line"></div>
+    <div class="container pt-3">
+      <form class="d-flex align-items-center flex-wrap justify-content-center justify-content-md-center gap-2">
+        {{filtroDobleUpcoming}}
+        <div class="d-flex flex-wrap align-items-center justify-content-center gap-3">
+          <div class="form-check" v-for="checks in categorias">
+          <input v-model="categoriasFiltradas" class="form-check-input checkbox" type="checkbox" role="switch" :id="checks" :value="checks">
+          <label class="form-check-label" :for="checks">{{checks}}</label>
+          </div>
+        </div>
+        <div class="d-flex justify-content-center align-items-center">
+          <input v-model="buscador" class="form-control" type="text" aria-label="Search">
+        </div>
+      </form>
+    </div>
+    <main class="container d-flex flex-wrap gap-4 my-5 justify-content-center">
+      <div class="card carta" v-for="evento in eventosUpcoming">
+        <img :src="evento.image" class="card-img-top" :alt="evento.name">
+        <div class="card-body">
+          <h5 class="card-title">{{evento.name}}</h5>
+          <p class="card-text"><b>Place:</b>{{evento.place}}</p>
+          <p class="card-text"><b>Category:</b>{{evento.category}}</p>
+        </div>
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item"></li>
+        </ul>
+        <div class="card-body carta-body d-flex flex-wrap justify-content-evenly align-items-center">
+          <p class="card-text m-0"><b>Price:</b>${{evento.price}}</p>
+          <a :href="'./details.html?id=' + evento._id" class="card-link">Details</a>
+        </div>
+      </div>
+      <p class="h3 fw-bolder text-dark" v-show="eventosUpcoming.length == 0">No hay eventos registrados con ese nombre y/o categoría</p>
+    </main>
+    <div class="line"></div>
+    <footer class="container">
+      <div class="d-flex flex-column flex-md-row align-items-center justify-content-md-between">
+        <div class="media">
+          <i class="fa-brands fa-instagram"></i>
+          <i class="fa-brands fa-facebook"></i>
+          <i class="fa-brands fa-whatsapp"></i>
+        </div>
+        <p class="fs-5">Anderson Sarmiento | Cohort 33</p>
+      </div>
+    </footer>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa"
+    crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+  <script src="./assets/js/index.js"></script>
+</body>
+
+</html>
